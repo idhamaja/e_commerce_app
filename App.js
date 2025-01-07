@@ -7,9 +7,11 @@ import {
   Roboto_700Bold,
   useFonts,
 } from "@expo-google-fonts/roboto";
-import React, {  useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
 
 const Stack = createNativeStackNavigator();
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   let [fontsloaded] = useFonts({
@@ -17,19 +19,22 @@ export default function App() {
     Roboto_700Bold,
   });
 
-  const onLayoutRootView = useCallback(async() => {
-    console.log("events triggered");
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsloaded) {
+      console.log("events triggered", fontsloaded);
+      await SplashScreen.hideAsync();
+    }
   }, [fontsloaded]);
 
   if (!fontsloaded) {
     console.log("Fonts not loaded");
     return null;
   } else {
-    console.log("Fonts loaded");
+    console.log("Fonts are loaded");
   }
 
   return (
-    <NavigationContainer onReady={onLayoutRootView} >
+    <NavigationContainer onReady={onLayoutRootView}>
       <Stack.Navigator
         screenOptions={{
           tabBarStyle: {

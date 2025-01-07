@@ -1,7 +1,8 @@
-import { FlatList, SafeAreaView, StyleSheet, Image } from "react-native";
-import React from "react";
+import { FlatList, SafeAreaView, StyleSheet, Image, View, Text } from "react-native";
+import React, { useState, useEffect } from "react";
 import { theme } from "../constants/theme";
 import ProductCardComponent from "../components/ProductCardComponent";
+import { Ionicons } from "@expo/vector-icons";
 
 const LocalProductList = [
   {
@@ -25,7 +26,30 @@ const LocalProductList = [
 ];
 
 export default function ProductList() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log("Use effect is being called");
+    const timer = setTimeout(() => {
+      console.log("changing the state variable value");
+      setLoading(false);
+      console.log("The value of loading is point 2", loading);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+        <Text>Loading...</Text>
+        <Ionicons name="reload-circle" size={64} />
+      </View>
+    );
+  }
+
   const renderItem = ({ item }) => {
+    console.log("The value of loading is point 1", loading);
+
     return <ProductCardComponent item={item} />;
   };
 
@@ -44,7 +68,6 @@ export default function ProductList() {
 const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
-    //alignItems: "center",
     height: 240,
     overflow: "hidden",
     margin: 10,
