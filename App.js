@@ -9,6 +9,7 @@ import {
 } from "@expo-google-fonts/roboto";
 import React, { useCallback, useState, useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import BottomTabs from "./src/screens/BottomTabs";
 
 const Stack = createNativeStackNavigator();
 SplashScreen.preventAutoHideAsync();
@@ -43,13 +44,13 @@ export default function App() {
             right: 0,
             left: 0,
             elevation: 0,
-            height: 0,
+            height: 70,
           },
         }}
       >
         <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
+          name="BottomTabs"
+          component={BottomTabs}
           options={{ headerShown: false }}
         />
         <Stack.Screen name="ProductList" component={ProductList} />

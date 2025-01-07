@@ -1,8 +1,16 @@
-import { FlatList, SafeAreaView, StyleSheet, Image, View, Text } from "react-native";
+import {
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  View,
+  Text,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { theme } from "../constants/theme";
 import ProductCardComponent from "../components/ProductCardComponent";
 import { Ionicons } from "@expo/vector-icons";
+import LottieView from "lottie-react-native";
 
 const LocalProductList = [
   {
@@ -29,7 +37,7 @@ export default function ProductList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("Use effect is being called");
+    console.log("Use effect LOADING is being called");
     const timer = setTimeout(() => {
       console.log("changing the state variable value");
       setLoading(false);
@@ -41,15 +49,17 @@ export default function ProductList() {
   if (loading) {
     return (
       <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-        <Text>Loading...</Text>
-        <Ionicons name="reload-circle" size={64} />
+        <LottieView
+          source={require("../../assets/jsons/animation.json")}
+          autoPlay
+          style={{ width: 150, height: 150 }}
+          loop
+        />
       </View>
     );
   }
 
   const renderItem = ({ item }) => {
-    console.log("The value of loading is point 1", loading);
-
     return <ProductCardComponent item={item} />;
   };
 
