@@ -4,6 +4,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import ProductList from "./src/screens/ProductListScreen";
 import {
   Roboto_400Regular,
+  Roboto_500Medium,
   Roboto_700Bold,
   useFonts,
 } from "@expo-google-fonts/roboto";
@@ -18,6 +19,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   let [fontsloaded] = useFonts({
     Roboto_400Regular,
+    Roboto_500Medium,
     Roboto_700Bold,
   });
 
@@ -56,8 +58,7 @@ export default function App() {
         />
         <Stack.Screen name="ProductList" component={ProductList} />
 
-
-        <Stack.Screen name="prodcut_detail" component={ProductDetail}/>
+        <Stack.Screen name="prodcut_detail" component={ProductDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

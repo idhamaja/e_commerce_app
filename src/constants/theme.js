@@ -1,3 +1,7 @@
+import { Dimensions } from "react-native";
+
+const { height, width } = Dimensions.get("window");
+
 export const theme = {
   colors: {
     primary: "#2A4D50",
@@ -7,6 +11,7 @@ export const theme = {
     offWhite: "#F3F4F8",
     white: "#FFFFFF",
     black: "#000000",
+    lightWhite: "#FAFAFC",
   },
   sizes: {
     xSmall: 10,
@@ -15,5 +20,7 @@ export const theme = {
     large: 20,
     xLarge: 24,
     xxLarge: 44,
+    width,
+    height,
   },
 };
