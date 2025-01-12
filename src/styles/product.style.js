@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
 
     alignItems: "center",
-    marginRight: 20,
   },
   rating: {
     flexDirection: "row",
@@ -55,9 +54,62 @@ const styles = StyleSheet.create({
     borderRadius: theme.sizes.large,
     paddingHorizontal: 10,
   },
-  descriptionWrapper: {},
-  descriptionTitle: {},
-  descriptionText: {},
+  descriptionWrapper: {
+    marginTop: theme.sizes.large * 2,
+    marginHorizontal: theme.sizes.large,
+  },
+  descriptionTitle: {
+    fontFamily: "Roboto_700Bold",
+    fontSize: theme.sizes.large - 2,
+  },
+  descriptionText: {
+    fontFamily: "Roboto_400Regular",
+    textAlign: "justify",
+  },
+
+  location: {
+    paddingVertical: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: theme.colors.secondary,
+    padding: 5,
+    borderRadius: theme.sizes.large,
+  },
+  cartRow: {
+    marginHorizontal: theme.sizes.large,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: theme.sizes.large,
+  },
+  cartTitle: {
+    marginLeft: theme.sizes.small,
+    fontFamily: "Roboto_500Medium",
+    fontSize: theme.sizes.medium,
+    color: theme.colors.lightWhite,
+  },
+  addCart: {
+    width: 37,
+    height: 37,
+    backgroundColor: theme.colors.black,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buyButton: {
+    backgroundColor: theme.colors.black,
+    justifyContent: "center",
+    alignItems: "center",
+    width: theme.sizes.width * 0.7,
+    borderRadius: theme.sizes.large,
+  },
+  favButton: {
+    backgroundColor: theme.colors.primary,
+    width: 36,
+    height: 36,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 export default styles;

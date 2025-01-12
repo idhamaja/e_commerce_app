@@ -12,11 +12,16 @@ import React, { useCallback, useState, useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import BottomTabs from "./src/screens/BottomTabs";
 import ProductDetail from "./src/screens/ProductDetail";
+import { LoginContext } from "./src/context/UserLoginContext";
+import { FavContext } from "./src/context/RefectchFavContext";
 
 const Stack = createNativeStackNavigator();
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const {userLogin, setUserLogin} = useState(true);
+  const {refetchFav, setRefetchFav} = useState("");
+
   let [fontsloaded] = useFonts({
     Roboto_400Regular,
     Roboto_500Medium,
@@ -38,28 +43,32 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer onReady={onLayoutRootView}>
-      <Stack.Navigator
-        screenOptions={{
-          tabBarStyle: {
-            position: "absolute",
-            bottom: 0,
-            right: 0,
-            left: 0,
-            elevation: 0,
-            height: 70,
-          },
-        }}
-      >
-        <Stack.Screen
-          name="BottomTabs"
-          component={BottomTabs}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="ProductList" component={ProductList} />
+    <LoginContext.Provider value={{ userLogin, setUserLogin }}>
+      <FavContext.Provider value={{ refetchFav, setRefetchFav }}>
+        <NavigationContainer onReady={onLayoutRootView}>
+          <Stack.Navigator
+            screenOptions={{
+              tabBarStyle: {
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                left: 0,
+                elevation: 0,
+                height: 70,
+              },
+            }}
+          >
+            <Stack.Screen
+              name="BottomTabs"
+              component={BottomTabs}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="ProductList" component={ProductList} />
 
-        <Stack.Screen name="prodcut_detail" component={ProductDetail} />
-      </Stack.Navigator>
-    </NavigationContainer>
+            <Stack.Screen name="prodcut_detail" component={ProductDetail} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavContext.Provider>
+    </LoginContext.Provider>
   );
 }
