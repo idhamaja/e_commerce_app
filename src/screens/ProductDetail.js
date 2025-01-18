@@ -11,9 +11,15 @@ import {
   MaterialCommunityIcons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
-import { decrement, handlePress, increment } from "../utils/product_helpers";
+import {
+  decrement,
+  handlePress,
+  increment,
+  handleCart,
+} from "../utils/product_helpers";
 import { LoginContext } from "../context/UserLoginContext";
 import { FavContext } from "../context/RefectchFavContext";
+import { CartContext } from "../context/UserCartContext";
 
 export default function ProductDetail({ navigation }) {
   const [rating, setRating] = useState(0);
@@ -21,10 +27,14 @@ export default function ProductDetail({ navigation }) {
 
   const { userLogin, setUserLogin } = useContext(LoginContext);
   const { refetchFav, setRefetchFav } = useContext(FavContext);
+  const { userCart, setUserCart } = useContext(CartContext);
 
   const route = useRoute();
 
   const item = route.params.item;
+  //result
+  console.log("product ID is", item.id);
+  console.log("Favourite ID is", refetchFav);
 
   return (
     <View style={styles.container}>
@@ -119,7 +129,9 @@ export default function ProductDetail({ navigation }) {
 
           {/* Shopping bag icon */}
           <TouchableOpacity
-            onPress={() => console.log("order Tapped")}
+            onPress={() =>
+              handleCart(navigation, item, count, userLogin, setUserCart)
+            }
             style={styles.addCart}
           >
             <Fontisto

@@ -14,13 +14,15 @@ import BottomTabs from "./src/screens/BottomTabs";
 import ProductDetail from "./src/screens/ProductDetail";
 import { LoginContext } from "./src/context/UserLoginContext";
 import { FavContext } from "./src/context/RefectchFavContext";
+import { CartContext } from "./src/context/UserCartContext";
 
 const Stack = createNativeStackNavigator();
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const {userLogin, setUserLogin} = useState(true);
-  const {refetchFav, setRefetchFav} = useState("");
+  const { userLogin, setUserLogin } = useState(true);
+  const { refetchFav, setRefetchFav } = useState("");
+  const { userCart, setUserCart } = useState(0);
 
   let [fontsloaded] = useFonts({
     Roboto_400Regular,
@@ -44,31 +46,33 @@ export default function App() {
 
   return (
     <LoginContext.Provider value={{ userLogin, setUserLogin }}>
-      <FavContext.Provider value={{ refetchFav, setRefetchFav }}>
-        <NavigationContainer onReady={onLayoutRootView}>
-          <Stack.Navigator
-            screenOptions={{
-              tabBarStyle: {
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                left: 0,
-                elevation: 0,
-                height: 70,
-              },
-            }}
-          >
-            <Stack.Screen
-              name="BottomTabs"
-              component={BottomTabs}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="ProductList" component={ProductList} />
+      <CartContext.Provider value={{ userCart, setUserCart }}>
+        <FavContext.Provider value={{ refetchFav, setRefetchFav }}>
+          <NavigationContainer onReady={onLayoutRootView}>
+            <Stack.Navigator
+              screenOptions={{
+                tabBarStyle: {
+                  position: "absolute",
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  elevation: 0,
+                  height: 70,
+                },
+              }}
+            >
+              <Stack.Screen
+                name="BottomTabs"
+                component={BottomTabs}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen name="ProductList" component={ProductList} />
 
-            <Stack.Screen name="prodcut_detail" component={ProductDetail} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </FavContext.Provider>
+              <Stack.Screen name="prodcut_detail" component={ProductDetail} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </FavContext.Provider>
+      </CartContext.Provider>
     </LoginContext.Provider>
   );
 }
